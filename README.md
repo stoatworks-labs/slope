@@ -26,6 +26,18 @@ Resolume. RGB, two pixels a sample, a 1/64 step adapting to 1/8, and one
 received bit in a thousand flipped. Every streak is one wrong bit, fading on
 the integrator's leak.</sub>
 
+[![Slope — a one-bit delta modulator run along the scan line, for Resolume](docs/video-thumb.png)](https://www.youtube.com/watch?v=aBc61f7kMrI)
+
+*[Watch it](https://www.youtube.com/watch?v=aBc61f7kMrI) — 58 seconds:
+slope overload with a fixed step, the trade-off as Adaptation Rate rises,
+Pixels/Sample from 1 to 16, bit errors at one in a thousand and one in a
+hundred, Leak from none to four samples, Luma, RGB and Y+C, a vertical scan
+with the reconstruction filter, and Show Bits. Every frame is the real
+plugin's output: an FFGL plugin has no window, so the footage is rendered by
+this repository's own offline harness (`sltest --pipe`, driven by a cue
+sheet) rather than filmed off a screen, and the clips are Resolume's bundled
+demo media.*
+
 ## The one idea
 
 A delta modulator sends **one bit per sample**: is the input above or below my

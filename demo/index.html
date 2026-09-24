@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slope — browser demo | Stoatworks Labs</title>
+    <meta name="description" content="Try the Slope FFGL plugin for Resolume in your browser: a 1-bit CVSD delta modulator run along the scan line. The plugin's own sample, coder and display shaders ported to WebGL2 and run in the plugin's own chunks — slope overload, granular noise and bit-error streaks from one rule." />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./vendor/kit.css" />
+    <link rel="canonical" href="https://slope-demo.stoatworks-labs.com/" />
+  </head>
+  <body>
+    <main id="demo">
+      <noscript>
+        <p>
+          This demo runs the plugin's shaders in your browser, so it needs
+          JavaScript and WebGL2. The plugin itself, its source and its downloads
+          are on
+          <a href="https://github.com/stoatworks-labs/slope">its repository</a>.
+        </p>
+      </noscript>
+    </main>
+
+    <script type="module" src="./plugin.js"></script>
+    <script
+      src="./vendor/support-footer.js"
+      defer
+      data-app="Slope"
+      data-repo="https://github.com/stoatworks-labs/slope"
+      data-note="A browser demo of the plugin's own shaders, scheduled as the plugin schedules them. Nothing you load here leaves your machine."
+    ></script>
+  </body>
+</html>

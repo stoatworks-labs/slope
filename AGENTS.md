@@ -400,7 +400,8 @@ build, at 320×180 and 1280×720.
 - **Not verified at 4K**, only benchmarked there.
 - **Windows** has not been built; the CI workflow is adapted from clamp's and has not
   run.
-- **No OpenFX port, no browser demo**, neither required for 0.1.0.
+- **No OpenFX port**, not required for 0.1.0. The browser demo's draw schedule
+  and control laws are a hand port nothing checks; see *The browser demo*.
 - **`StoatworksAbout.h` and `ATTRIBUTIONS.md` are provisional hand copies** with
   `guide=""`; register the project and re-run the syncs before the first release.
 - **Nothing has been through a show.**
@@ -423,6 +424,49 @@ build, at 320×180 and 1280×720.
   frame now.
 - **A tighter running bound** would need the errors of consecutive steps to be
   correlated, which a worst-case bound cannot use; the exact settings make up for it.
+
+---
+
+## The browser demo
+
+`demo/` is the page at **slope-demo.stoatworks-labs.com**, a static-assets Worker
+deployed from `wrangler.toml` with `cf-run npx wrangler deploy` and by
+`.github/workflows/deploy.yml` on every push to main (no build step; what is
+committed is what is served). `demo/vendor/` is the shared kit from
+`stoatworks-backend/resolume-demo/` and is not edited here. The host is a Worker
+**route** plus a proxied `AAAA 100::` DNS record, not a custom domain: the zone
+hit Cloudflare's 100-custom-domain limit on 2026-09-24. Delete that record and
+the page goes dark while deploys stay green.
+
+The page runs the plugin's four shaders, copied across unedited:
+`demo/tools/check_shaders.py` compares them with `source/Shaders.cpp` character
+for character and `tools/verify.sh` fails if one drifts. This plugin has no CPU
+half to speak of — the coder is the shader — so the demo is closer to the plugin
+than galvo's or clamp's. **What is a port** is the scheduling: `Controls.cpp`
+function for function, `Slope::ProcessOpenGL`'s order (the sample pass, one coder
+draw per chunk of `kChunk` with the viewport offset so `gl_FragCoord.x` is the
+sample index, the ping-pong between two state buffers, the display), and
+`StateBuffer.cpp` as a WebGL2 framebuffer with two RGBA32F attachments
+(`gl.drawBuffers`; `EXT_color_buffer_float` is required and the kit refuses to
+start without it). **Nothing checks that port but a reader.** Change any of those
+and change `demo/plugin.js` by hand to match.
+
+What the page does differently, all of it said on the page:
+
+- **Pixels/Sample is a dropdown** of 1..16. It is `FF_TYPE_INTEGER` in the plugin
+  and the kit has no integer control.
+- The Max Step readout shows its law alone; the coder takes `max( StepMin, … )`
+  as the plugin does.
+- The bit errors are seeded from the page's own per-render counter, as the
+  plugin's `frameIndex++` is. The harness hooks (`Perturb`, `Forced*`) are held
+  at 0 and -1.
+- The About block is absent, as on every page in the suite. No audio caveat:
+  Slope has no audio path.
+
+Decided without asking, for the page: colour bars lead the clip list because hard
+edges are the effect; the presets are the page's own (the plugin ships none),
+expressed entirely in its parameters; and a line under the canvas reports the
+geometry the port chose (samples per line, lines × coders, coder draws).
 
 ---
 

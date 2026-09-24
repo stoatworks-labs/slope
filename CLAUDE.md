@@ -50,6 +50,7 @@ the chunking in `Slope.cpp`, the control laws or the harness's bounds.
 - No dead controls: `python3 tools/sweep.py` (`--size WxH`, `--jobs N`)
 - Render cost: `./build/sltest --bench` (best of three; the GPU is shared, so run it twice)
 - What a host sees: `~/Projects/resolume/oxbow/build/oxbow probe build-universal/Slope.bundle`
+- The demo's shaders are still the plugin's: `python3 demo/tools/check_shaders.py`
 
 ## Notes
 - **The shader IS the coder.** The recurrence lives once, in GLSL (`Shaders.cpp`,
@@ -94,9 +95,22 @@ the chunking in `Slope.cpp`, the control laws or the harness's bounds.
 - **Never loaded into Resolume.** Everything numeric is measured offline on macOS,
   plus an `oxbow` load. Never seen on footage, only on synthetic cards and noise.
 - No Windows run, no win-lab gate, no Arena gate (v0.1.0 is local).
-- No OpenFX port, no browser demo, no factory presets, no audio input.
+- No OpenFX port, no factory presets, no audio input.
+- **The browser demo's scheduling is a port**: `Controls.cpp`, `StateBuffer.cpp` and the draw order in `ProcessOpenGL` are a hand port in `demo/plugin.js`, and nothing checks it. Change any of those and change `demo/plugin.js` by hand. The shaders themselves are checked (`demo/tools/check_shaders.py`).
 - `StoatworksAbout.h` and `ATTRIBUTIONS.md` are provisional hand copies with
   `guide=""`; the release step registers the project and re-runs the syncs.
+
+## Browser demo
+
+`demo/` is the page at **slope-demo.stoatworks-labs.com**, deployed from
+`wrangler.toml` with `cf-run npx wrangler deploy` and by `deploy.yml` on a push to
+main — no build step; what is committed is what is served. The host is a Worker
+route plus a proxied `AAAA 100::` record (the zone is at its custom-domain limit).
+`demo/vendor/` is copied in by
+`~/Projects/infrastructure/stoatworks-backend/resolume-demo/sync.sh slope` and is not
+a place to edit. The shaders in `demo/plugin.js` must stay the plugin's:
+`python3 demo/tools/check_shaders.py` (run by `tools/verify.sh`). Serve it locally
+with `python3 -m http.server` in `demo/`. See AGENTS.md, *The browser demo*.
 
 ## Diagnostics
 

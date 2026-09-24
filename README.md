@@ -109,8 +109,11 @@ above was compiled, rendered and measured offline against the real plugin
 class in a headless CGL context, plus an `oxbow` load. Never seen on footage,
 only on synthetic cards and noise. How twelve controls read in Arena's
 inspector, and whether the look wants a shorter default leak, are untested.
-Windows compiles in CI's design and has not been built here. No OpenFX port
-and no browser demo, neither in scope for 0.1.0. No user guide yet.
+Windows compiles in CI's design and has not been built here. No OpenFX port,
+not in scope for 0.1.0. The [browser demo](https://slope-demo.stoatworks-labs.com/)
+runs the plugin's own shaders in the plugin's own chunks; its draw schedule and
+control laws are a hand port to JavaScript, and nothing checks a port but a
+reader. No user guide yet.
 
 ## Build
 
@@ -154,6 +157,20 @@ ffmpeg -i in.mov -f rawvideo -pix_fmt rgba - \
 
 See [`CLAUDE.md`](CLAUDE.md) for the full command reference and
 [`AGENTS.md`](AGENTS.md) for the model and the traps.
+
+## Browser demo
+
+[slope-demo.stoatworks-labs.com](https://slope-demo.stoatworks-labs.com/) runs
+the plugin's own sample, coder and display shaders in WebGL2, on generated clips,
+with every control the plugin declares. The coder *is* the shader, so what you
+see is the recurrence the plugin runs; `demo/tools/check_shaders.py` fails
+`tools/verify.sh` if the page's copy of any shader drifts from `source/Shaders.cpp`.
+The draw schedule (one draw per chunk of 32 samples, ping-ponging two
+two-attachment state buffers) and the control laws are a hand port of
+`Slope.cpp`, `StateBuffer.cpp` and `Controls.cpp`, and nothing checks that but a
+reader. It is not the plugin: no Resolume, no FFGL, GLSL ES 3.00 rather than GL
+4.1, and Pixels/Sample is a dropdown because the page has no integer control.
+The page says all of this itself. Source in [`demo/`](demo/).
 
 <!-- attributions:start -->
 This project is built on other people's work — see [ATTRIBUTIONS.md](ATTRIBUTIONS.md).

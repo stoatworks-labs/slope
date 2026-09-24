@@ -30,7 +30,8 @@
 	is the bare staircase.
 
 	**Every scan line is its own coder**, started from the blanking level
-	(kStartLevel) with the minimum step and an alternating history: a real
+	(kStartLevel; a Y+C chroma coder from kStartChroma, zero colour
+	difference) with the minimum step and an alternating history: a real
 	system would carry its state through a blanking interval of black and
 	arrive at much the same place, and independent lines are what lets the
 	GPU run them side by side. A sample is the box average of `pitch`
@@ -74,6 +75,11 @@ constexpr int kChunk = 32;
 
 /// Where every line's coder starts: the blanking level.
 constexpr double kStartLevel = 0.0;
+
+/// Where a Y+C chroma coder starts: zero colour difference, which Cb and Cr
+/// code as 0.5. Blanking is black with no colour; a chroma coder started at 0
+/// (saturated green) opened every line with a green ramp, seen on footage.
+constexpr double kStartChroma = 0.5;
 
 /// Where the leaky integrator rests: mid-grey, the bias point of an
 /// AC-coupled stage.

@@ -152,6 +152,7 @@ layout( location = 0 ) out vec4 outE;
 layout( location = 1 ) out vec4 outD;
 
 const float kStartLevel = 0.0;
+const float kStartChroma = 0.5;
 const int kStartHistory = 5;
 
 uint hashInt( uint v )
@@ -194,7 +195,12 @@ void main()
 	float leakDec  = ( Perturb & 4 ) != 0 ? 1.0 : LeakI;
 	bool halfRate  = Channels == 2 && c > 0 && ( Perturb & 128 ) == 0;
 
-	float ye = kStartLevel, se = StepMin, yd = kStartLevel, sd = StepMin, r = kStartLevel;
+	//A chroma coder starts at zero colour difference, which is coded 0.5:
+	//blanking is black WITH no colour, and a line that started its chroma
+	//at 0 would open with a green ramp on every line (found on footage).
+	bool chroma    = Channels == 2 && c > 0;
+	float start    = chroma ? kStartChroma : kStartLevel;
+	float ye = start, se = StepMin, yd = start, sd = StepMin, r = start;
 	int he = kStartHistory & RunMask, hd = kStartHistory & RunMask;
 	int rx = 0;
 	if( ChunkStart > 0 && ( Perturb & 1 ) == 0 )

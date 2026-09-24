@@ -541,6 +541,8 @@ struct Reference
 		enc.hist = dec.hist = model::kStartHistory & L.mask;
 		double r = model::kStartLevel, eR = 0.0;
 		const bool halfRate = L.channels == 2 && c > 0;
+		if( L.channels == 2 && c > 0 )
+			enc.y = dec.y = r = model::kStartChroma;//a chroma coder starts at zero colour difference
 		const double eX     = sampleBound();
 		int rx = 0;
 		for( int n = 0; n < N; ++n )

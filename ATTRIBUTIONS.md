@@ -3,9 +3,8 @@
 Slope is built on other people's work. This file lists what that work is, who did
 it, and what it is doing here.
 
-This is a PROVISIONAL hand copy (2026-09-24). The real file is generated — the
-master lists live in the `stoatworks-backend` repo and are pushed out by
-`scripts/sync-attributions.py` once the project is registered. Edit it there, not here.
+It is generated — the master lists live in the `stoatworks-backend` repo and are
+pushed out by `scripts/sync-attributions.py`. Edit it there, not here.
 
 ## Code we derived from other people's work
 
@@ -17,15 +16,15 @@ Someone else solved this first, and this project would not exist in its current 
 Licence: MIT  
 Copyright: Stoatworks Labs
 
-The harness shape, the --pipe contract (SIGPIPE ignored), the negative-control pattern, --offline, check-shaders.sh, the verify script, the sweep and the CI workflows are clamp's, by way of standards.
+The harness shape, the --pipe contract (SIGPIPE ignored, a closed stdout exits 1), the negative-control pattern, --offline, check-shaders.sh, the verify script, the sweep and the CI workflows are clamp's, by way of standards.
 
-### A serial recurrence on the GPU — Stoatworks compander and clamp
+### A serial recurrence on the GPU — Stoatworks compander
 
 <https://github.com/stoatworks-labs/compander>  
 Licence: MIT  
 Copyright: Stoatworks Labs
 
-The idea of computing a serial recurrence on the GPU and holding it to a serial double-precision one is compander's and clamp's; the chunked exact form here is this repo's own.
+The idea of computing a serial recurrence on the GPU and holding it to a serial double-precision one is compander's and clamp's; the chunked exact form in scan order is slope's own.
 
 ### PassBuffer — Stoatworks tinsel
 
@@ -45,7 +44,7 @@ Libraries, SDKs and frameworks the project is built on or bundles.
 Licence: BSD-3-Clause  
 Copyright: FreeFrame
 
-Vendored as a git submodule at external/ffgl.
+Vendored as a git submodule at external/ffgl (third_party/ffgl in oxbow).
 
 The plugin ABI itself. An FFGL effect or source is defined by this SDK's headers — there is no other way to be loadable by Resolume Arena and Avenue.
 
@@ -75,7 +74,7 @@ What this set out to be. No code, assets or binaries from any of these were used
 
 ### Continuously variable slope delta modulation
 
-The one-bit coder with a syllabic step adapter and leaky integrators, as described in the open literature and in the data sheets of the classic CVSD codec parts (a 3- or 4-bit coincidence detector driving a syllabic filter, integrator and syllabic time constants stated in samples). Built from the description; no manufacturer's design, coefficients or name is used, and the time constants here are chosen for a picture, not for speech.
+The one-bit coder with a syllabic step adapter and leaky integrators, as described in the open literature and in the data sheets of the classic CVSD codec parts (a 3- or 4-bit coincidence detector driving a syllabic filter, with integrator and syllabic time constants stated in samples). Built from the description; no manufacturer's design, coefficients or name is used, and the time constants here are chosen for a picture, not for speech.
 
 ## Standards and published specifications
 

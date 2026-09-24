@@ -332,9 +332,16 @@ after.
 - **`--fps` is accepted and does nothing**, so the fleet's video renderer can pass it.
 - **`--fail-render-at N`** is a harness-only hook so `verify.sh` can prove `--pipe`
   exits 1 on a failed render.
-- **Provisional About and attributions** (`StoatworksAbout.h`, `ATTRIBUTIONS.md`) are
-  hand copies adapted from clamp's with `guide=""`, so three About buttons; the
-  release step registers the project and re-runs the syncs.
+- **About and attributions are generated** (`StoatworksAbout.h` by
+  `stoatworks-backend/scripts/sync-about.py`, `ATTRIBUTIONS.md` by
+  `sync-attributions.py`) now the project is registered; four About buttons, so
+  `--list` shows 17 parameters. Never edit either by hand.
+- **A Y+C chroma coder starts a line at 0.5, not 0** (`kStartChroma`). The first
+  render of real footage (2026-09-24, the release video) opened every line in Y+C
+  with a green bar: Cb = Cr = 0 is saturated green, and the coders climbed from it
+  to neutral over the first samples. Blanking is black WITH no colour, so the
+  chroma coders start at zero colour difference. The harness's serial model
+  starts them there too; every exact check still holds.
 - **The FFGL submodule was dissociated from the reference clone** (`repack -a -d`,
   the alternates file removed) so this repo does not depend on a path in `~/Projects`.
 
@@ -393,17 +400,14 @@ build, at 320×180 and 1280×720.
 - ☠️ **Never loaded into Resolume**, on either platform. Everything was compiled,
   rendered and measured offline against the real plugin class in a headless CGL
   context, plus an `oxbow` load.
-- **Never seen on footage.** Every picture so far is synthetic: cards, edges, noise.
 - **The defaults are judged from three renders of the card**, not from a show. The
   left margin's climb from blanking is visible by design; whether an operator wants
   it is untested.
 - **Not verified at 4K**, only benchmarked there.
-- **Windows** has not been built; the CI workflow is adapted from clamp's and has not
-  run.
-- **No OpenFX port**, not required for 0.1.0. The browser demo's draw schedule
-  and control laws are a hand port nothing checks; see *The browser demo*.
-- **`StoatworksAbout.h` and `ATTRIBUTIONS.md` are provisional hand copies** with
-  `guide=""`; register the project and re-run the syncs before the first release.
+- **No OpenFX port.** The browser demo's draw schedule and control laws are a hand
+  port nothing checks; see *The browser demo*.
+- **Footage has only been seen through `--pipe`** (the release video's render over
+  Resolume's demo clips), never in a host.
 - **Nothing has been through a show.**
 
 ---

@@ -104,16 +104,17 @@ where the time goes. macOS figures only.
 
 ### Not established
 
-It has **never been loaded into Resolume**, on either platform. Everything
-above was compiled, rendered and measured offline against the real plugin
-class in a headless CGL context, plus an `oxbow` load. Never seen on footage,
-only on synthetic cards and noise. How twelve controls read in Arena's
-inspector, and whether the look wants a shorter default leak, are untested.
-Windows compiles in CI's design and has not been built here. No OpenFX port,
-not in scope for 0.1.0. The [browser demo](https://slope-demo.stoatworks-labs.com/)
+It has **never been loaded into Resolume on macOS**. Everything above was
+compiled, rendered and measured offline against the real plugin class in a
+headless CGL context, plus an `oxbow` load. Footage has only been seen
+through the harness's `--pipe` (Resolume's bundled demo clips, for the
+release video): that is where the Y+C chroma start was found and fixed, and
+it is what confirmed the defaults survive the library without flooding any
+clip. How twelve controls read in Arena's inspector on macOS is untested.
+No OpenFX port. The [browser demo](https://slope-demo.stoatworks-labs.com/)
 runs the plugin's own shaders in the plugin's own chunks; its draw schedule and
 control laws are a hand port to JavaScript, and nothing checks a port but a
-reader. No user guide yet.
+reader. There is a [user guide](https://stoatworks-labs.com/software/slope/guide/).
 
 ## Build
 

@@ -25,7 +25,8 @@ thousand flipped. Every streak is one wrong bit, fading on the integrator's leak
 > a tolerance of **zero** in the settings where float arithmetic is exact; a vertical scan is the
 > horizontal one transposed, bit for bit; and nine deliberate faults are shown to make those checks
 > fail. All 12 controls are shown to change the picture. It has **never been loaded into Resolume on
-> macOS** — the one host it has run in is the fleet's own test host, `oxbow`, for 120 frames.
+> macOS** — the one host it has run in there is the fleet's own test host, `oxbow`, for 120 frames.
+> On Windows, a build of this source loads, registers and renders in Resolume Arena 7.27.1 on software rendering (win-lab, Mesa llvmpipe, no GPU): all 18 host controls match the declaration and all 13 that take a value move the picture, 9 of the fleet gate's 9 checks. Software rendering says nothing about a GPU or about speed.
 > Try it on a spare layer before you put it in a show.
 >
 > This codebase was created with AI assistance, directed and reviewed by a human author.
@@ -345,6 +346,9 @@ failed to compile if one did, and a buffer that could not be allocated.
 - **No audio input, no presets** and no OpenFX version.
 - **Only ever run on an Apple M4 Max**, although the macOS build contains an Intel slice. On
   Windows, see the note at the top of this guide.
+- **There is a browser demo** at [slope-demo.stoatworks-labs.com](https://slope-demo.stoatworks-labs.com).
+  It runs the plugin's own shaders in WebGL2 with the draw schedule ported to JavaScript; the page
+  lists what it does not reproduce.
 - **Checked at up to 1920×1080**, and only timed at 4K.
 
 ---

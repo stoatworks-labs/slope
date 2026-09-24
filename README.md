@@ -75,7 +75,7 @@ margin of every line is itself an edge, climbing.
 
 ## Status
 
-**v0.1.0, local and unreleased, 2026-09-24.** Built from the fleet's templates
+**v0.1.0, 2026-09-24.** Built from the fleet's templates
 in one session. What `tools/verify.sh` establishes on this Mac (Apple M4 Max,
 macOS 26.4.1), on a fresh universal build, at **320×180 and 1280×720**:
 
@@ -95,6 +95,7 @@ macOS 26.4.1), on a fresh universal build, at **320×180 and 1280×720**:
 | shaders | all 4, as the plugin compiles them, through `glslc` |
 | `--pipe` | 2.5 frames in, exactly 2 out; an unknown cue refused (2); a failed render and a closed stdout (`\| head -c 1`) each exit 1 |
 | the bundle | universal (`x86_64 arm64`), exports `plugMain`, ad-hoc signs; `oxbow` reports `SW Slope` / `SL01` / `effect` and renders 120 frames through `plugMain` |
+| Windows, in Arena | a CI build of this source loads from Extra Effects in Resolume Arena 7.27.1 on win-lab (Mesa llvmpipe, no GPU), registers as `SW Slope` / `SL01` / effect, all 18 host controls match the declaration, it renders, all 13 valued controls move the picture and Arena's log stays clean: 9 of the fleet gate's 9 checks |
 
 Render cost at the defaults, best of three runs of 60 frames after a warm-up,
 `glFinish` both sides, on a GPU shared with other builds: **0.60 ms** at 720p,

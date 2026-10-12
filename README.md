@@ -146,8 +146,8 @@ where the time goes. macOS figures only.
 
 ### Not established
 
-It's **never been loaded into Resolume on macOS**. Everything above was
-compiled, rendered and measured offline against the real plugin class in a
+It's **never been loaded into Resolume on macOS**. Everything above but the
+Windows row was compiled, rendered and measured offline against the real plugin class in a
 headless CGL context, plus an `oxbow` load. Footage has only been seen
 through the harness's `--pipe` (Resolume's bundled demo clips, for the
 release video). That's where the Y+C chroma start was found and fixed, and

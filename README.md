@@ -5,11 +5,12 @@
 > taken on trust: an offline harness drives the real plugin class without a host and reads each
 > claim back out of the picture it made. Edges climb in the number of samples they should, the
 > idle pattern and the adaptive step behave as stated, a forced bit error fades on the
-> integrator's time constant (fitted to 64.00 and 256.0 samples), the GPU matches a serial
+> integrator's time constant (fitted to 64.02 and 256.0 samples), the GPU matches a serial
 > double-precision run of the same recurrence with a tolerance of **zero** where float
 > arithmetic is exact, and nine broken coders prove each check can fail. It has **never been
-> loaded into Resolume**. It's loaded by [oxbow](https://github.com/stoatworks-labs/oxbow), which
-> is a real FFGL host, just not Resolume. See [Status](#status).
+> loaded into Resolume on a Mac**. There it's loaded by [oxbow](https://github.com/stoatworks-labs/oxbow),
+> which is a real FFGL host, just not Resolume. On Windows it has run in Arena 7.27.1 on
+> software rendering. See [Status](#status).
 
 A one-bit delta modulator run along the scan line, as an FFGL effect for
 [Resolume](https://resolume.com) Arena and Avenue. It's the voice codec from military radios

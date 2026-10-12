@@ -341,8 +341,8 @@ failed to compile if one did, and a buffer that couldn't be allocated.
 
 ## Known limits
 
-- **Never loaded into Resolume on macOS**, and nothing has driven the controls in a host. I
-  haven't tested how the twelve controls read in the inspector there.
+- **Never loaded into Resolume on macOS**, and on a Mac nothing has driven the controls in a
+  host. I haven't tested how the twelve controls read in the inspector there.
 - **Lines are independent.** A real serial system carries its state through the blanking interval;
   here every line restarts from black with the minimum step. That's what lets the GPU run the
   lines side by side, and it's why the left (or top) margin is an edge.

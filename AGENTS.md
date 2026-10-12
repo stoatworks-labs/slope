@@ -11,7 +11,7 @@ tell anybody this works.
 A 1-bit delta modulator — CVSD, continuously variable slope delta — run along the
 scan line of the picture, as an FFGL 2.1 effect (`SL01`, shown as `SW Slope`) for
 Resolume Arena and Avenue. C++17 + GLSL 4.10, CMake, universal macOS `.bundle` and
-a Windows `.dll`. MIT, intended home `github.com/stoatworks-labs/slope`.
+a Windows `.dll`. MIT, public at `github.com/stoatworks-labs/slope`.
 
 Built 2026-09-24 in one session from the fleet's templates and `specs/SPEC-slope.md`
 (with `BRIEF.md` and `BRIEF-ADDENDUM.md`): clamp for the harness, the verify script,
@@ -397,9 +397,10 @@ build, at 320×180 and 1280×720.
 
 ### Assumed, or not done
 
-- ☠️ **Never loaded into Resolume**, on either platform. Everything was compiled,
+- ☠️ **Never loaded into Resolume on macOS.** Everything there was compiled,
   rendered and measured offline against the real plugin class in a headless CGL
-  context, plus an `oxbow` load.
+  context, plus an `oxbow` load. On Windows a CI build passed the fleet's Arena
+  gate, 9 of 9, in Arena 7.27.1 on win-lab (llvmpipe, no GPU; README, Status).
 - **The defaults are judged from three renders of the card**, not from a show. The
   left margin's climb from blanking is visible by design; whether an operator wants
   it is untested.

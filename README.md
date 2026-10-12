@@ -1,42 +1,38 @@
 # slope
 
 > **AI-assisted project.** This codebase was created with [Claude](https://claude.com/claude-code)
-> (Anthropic), directed and reviewed by a human author. The coder is not
-> asserted but measured: an offline harness drives the real plugin class in a
-> headless GL context and reads each claim back out of the picture it made —
-> a step edge of height h climbs in exactly ⌈h/Δ⌉ samples, at whole-sample and
-> part-sample edge positions; a flat field's idle pattern has period two and a
-> peak-to-peak of one step, sample for sample; on a run of bits the step grows
-> by the stated syllabic law; a forced bit error fades on the integrator's time
-> constant, fitted to 64.00 and 256.0 samples; every pixel of noise through
-> the GPU matches a serial double-precision run of the same recurrence, with a
-> tolerance of **zero** in the settings where float arithmetic is exact; a
-> vertical scan is the horizontal one transposed, bit for bit — with nine
-> negative controls that prove each check can fail. It has **never been loaded
-> into Resolume**. It is loaded by [oxbow](https://github.com/stoatworks-labs/oxbow),
-> which is a real FFGL host and is not Resolume. See [Status](#status).
+> (Anthropic), directed and reviewed by a human author. The coder is measured rather than
+> taken on trust: an offline harness drives the real plugin class without a host and reads each
+> claim back out of the picture it made. Edges climb in the number of samples they should, the
+> idle pattern and the adaptive step behave as stated, a forced bit error fades on the
+> integrator's time constant (fitted to 64.00 and 256.0 samples), the GPU matches a serial
+> double-precision run of the same recurrence with a tolerance of **zero** where float
+> arithmetic is exact, and nine broken coders prove each check can fail. It has **never been
+> loaded into Resolume**. It's loaded by [oxbow](https://github.com/stoatworks-labs/oxbow), which
+> is a real FFGL host, just not Resolume. See [Status](#status).
 
 A one-bit delta modulator run along the scan line, as an FFGL effect for
-[Resolume](https://resolume.com) Arena and Avenue.
+[Resolume](https://resolume.com) Arena and Avenue. It's the voice codec from military radios
+and Bluetooth headsets, pointed at a picture instead, where its bad habits look a good deal
+better than they ever sounded.
 
 ![A test card through the coder with bit errors: colour bars whose left edges smear rightwards into ramps, a grey ramp, and streaks that fade to the right where a received bit was wrong](docs/hero.png)
 
-<sub>One frame, rendered by `sltest`, the offline harness — not captured from
-Resolume. RGB, two pixels a sample, a 1/64 step adapting to 1/8, and one
+<sub>One frame, rendered by `sltest`, the offline harness, rather than captured
+from Resolume: RGB, two pixels a sample, a 1/64 step adapting to 1/8, and one
 received bit in a thousand flipped. Every streak is one wrong bit, fading on
 the integrator's leak.</sub>
 
 [![Slope — a one-bit delta modulator run along the scan line, for Resolume](docs/video-thumb.png)](https://www.youtube.com/watch?v=aBc61f7kMrI)
 
-*[Watch it](https://www.youtube.com/watch?v=aBc61f7kMrI) — 58 seconds:
-slope overload with a fixed step, the trade-off as Adaptation Rate rises,
+*[Watch it](https://www.youtube.com/watch?v=aBc61f7kMrI) (58 seconds): slope
+overload with a fixed step, the trade-off as Adaptation Rate rises,
 Pixels/Sample from 1 to 16, bit errors at one in a thousand and one in a
 hundred, Leak from none to four samples, Luma, RGB and Y+C, a vertical scan
-with the reconstruction filter, and Show Bits. Every frame is the real
-plugin's output: an FFGL plugin has no window, so the footage is rendered by
-this repository's own offline harness (`sltest --pipe`, driven by a cue
-sheet) rather than filmed off a screen, and the clips are Resolume's bundled
-demo media.*
+with the reconstruction filter, and Show Bits. It's all the plugin's own
+output. An FFGL plugin doesn't have a window to film, so the footage comes from
+this repo's offline harness (`sltest --pipe`, driven by a cue sheet) rather
+than a screen recording, and the clips are Resolume's bundled demo media.*
 
 <!-- downloads:start -->
 
@@ -74,18 +70,18 @@ macOS builds are signed and notarised and open normally. The Windows builds are 
 
 A delta modulator sends **one bit per sample**: is the input above or below my
 current guess? The decoder has only the same guess, stepped up or down by one
-step per bit. CVSD — continuously variable slope delta, the codec of military
-and Bluetooth voice — adapts that step: a run of identical bits means the guess
-is falling behind, so the step grows; alternating bits mean it is hunting round
-a flat input, so the step shrinks back. Both integrators leak, so a transmission
-error dies away.
+step per bit. CVSD (continuously variable slope delta, the codec of military
+and Bluetooth voice) adapts that step: a run of identical bits means the guess
+is falling behind, so the step grows, and alternating bits mean it's hunting
+round a flat input, so the step shrinks back. Both integrators leak, so a
+transmission error dies away.
 
 Run it along each scan line of the picture, one sample per few pixels, and
 every artefact falls out of that one rule. None of these is drawn:
 
 - **Slope overload.** The guess can climb one step a sample, so a hard edge
   arrives as a ramp smeared along the scan. Its length is h/Δ samples for a
-  step of height h — measured, exactly.
+  step of height h, and the measurement matches exactly.
 - **Granular noise.** On a flat area the bits alternate and the guess hunts one
   step around the true level: a fine two-sample dither wherever the picture is
   smooth.
@@ -95,9 +91,9 @@ every artefact falls out of that one rule. None of these is drawn:
 - **Bit errors** throw the decoder's guess for the rest of the line, fading on
   the leak's time constant: streaks that fade rightwards.
 
-The decoder is the real one: the reconstructed staircase goes through the
-decoder's low-pass reconstruction filter, which is a control, not a separate
-blur. Every scan line starts its coder from the blanking level, so the left
+The decoder is the real thing: the reconstructed staircase goes through the
+decoder's low-pass reconstruction filter, which is a control rather than a
+separate blur. Every scan line starts its coder from the blanking level, so the left
 margin of every line is itself an edge, climbing.
 
 ## Controls
@@ -120,7 +116,7 @@ margin of every line is itself an edge, climbing.
 ## Status
 
 **v0.1.0, 2026-09-24.** Built from the fleet's templates
-in one session. What `tools/verify.sh` establishes on this Mac (Apple M4 Max,
+in one session. Here's what `tools/verify.sh` shows on this Mac (Apple M4 Max,
 macOS 26.4.1), on a fresh universal build, at **320×180 and 1280×720**:
 
 | check | what it establishes |
@@ -149,17 +145,17 @@ where the time goes. macOS figures only.
 
 ### Not established
 
-It has **never been loaded into Resolume on macOS**. Everything above was
+It's **never been loaded into Resolume on macOS**. Everything above was
 compiled, rendered and measured offline against the real plugin class in a
 headless CGL context, plus an `oxbow` load. Footage has only been seen
 through the harness's `--pipe` (Resolume's bundled demo clips, for the
-release video): that is where the Y+C chroma start was found and fixed, and
-it is what confirmed the defaults survive the library without flooding any
-clip. How twelve controls read in Arena's inspector on macOS is untested.
-No OpenFX port. The [browser demo](https://slope-demo.stoatworks-labs.com/)
-runs the plugin's own shaders in the plugin's own chunks; its draw schedule and
-control laws are a hand port to JavaScript, and nothing checks a port but a
-reader. There is a [user guide](https://stoatworks-labs.com/software/slope/guide/).
+release video). That's where the Y+C chroma start was found and fixed, and
+it's what confirmed the defaults survive the library without flooding any
+clip. I haven't tested how twelve controls read in Arena's inspector on
+macOS. There's no OpenFX port. The [browser demo](https://slope-demo.stoatworks-labs.com/)
+runs the plugin's own shaders in the plugin's own chunks, but its draw schedule
+and control laws are a hand port to JavaScript, and nothing checks a port but a
+person reading it. There's a [user guide](https://stoatworks-labs.com/software/slope/guide/).
 
 ## Build
 
@@ -178,7 +174,7 @@ macOS builds are universal (Apple Silicon + Intel) by default; add
 
 ## Building and testing
 
-The offline harness renders the real plugin class headlessly:
+The offline harness renders the real plugin class without a host:
 
 ```bash
 ./build/sltest --out /tmp/frame.png --size 1920x1080   # the moving card
@@ -192,7 +188,7 @@ python3 tools/sweep.py                                 # no control is silently 
 tools/verify.sh                                        # all of it, on a fresh universal build
 ```
 
-Every check takes `--size`; run it at 320×180 as well as the raster you care about.
+Every check takes `--size`, so run it at 320×180 as well as at the raster you care about.
 Footage goes through the real shaders with `--pipe`, in the fleet's frame format:
 
 ```bash
@@ -209,14 +205,14 @@ See [`CLAUDE.md`](CLAUDE.md) for the full command reference and
 [slope-demo.stoatworks-labs.com](https://slope-demo.stoatworks-labs.com/) runs
 the plugin's own sample, coder and display shaders in WebGL2, on generated clips,
 with every control the plugin declares. The coder *is* the shader, so what you
-see is the recurrence the plugin runs; `demo/tools/check_shaders.py` fails
+see is the recurrence the plugin runs, and `demo/tools/check_shaders.py` fails
 `tools/verify.sh` if the page's copy of any shader drifts from `source/Shaders.cpp`.
 The draw schedule (one draw per chunk of 32 samples, ping-ponging two
 two-attachment state buffers) and the control laws are a hand port of
-`Slope.cpp`, `StateBuffer.cpp` and `Controls.cpp`, and nothing checks that but a
-reader. It is not the plugin: no Resolume, no FFGL, GLSL ES 3.00 rather than GL
-4.1, and Pixels/Sample is a dropdown because the page has no integer control.
-The page says all of this itself. Source in [`demo/`](demo/).
+`Slope.cpp`, `StateBuffer.cpp` and `Controls.cpp`, and only a person reading it
+checks that. It isn't the plugin: there's no Resolume and no FFGL, it's GLSL ES
+3.00 rather than GL 4.1, and Pixels/Sample is a dropdown because the page hasn't
+got an integer control. The page says all this itself. Source in [`demo/`](demo/).
 
 <!-- attributions:start -->
 This project is built on other people's work — see [ATTRIBUTIONS.md](ATTRIBUTIONS.md).

@@ -8,16 +8,42 @@
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="./vendor/kit.css" />
     <link rel="canonical" href="https://slope-demo.stoatworks-labs.com/" />
+    <meta name="project-page" content="https://stoatworks-labs.com/software/slope/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Stoatworks Labs" />
+    <meta property="og:title" content="Slope — browser demo | Stoatworks Labs" />
+    <meta property="og:description" content="Try the Slope FFGL plugin for Resolume in your browser: a 1-bit CVSD delta modulator run along the scan line. The plugin's own sample, coder and display shaders ported to WebGL2 and run in the plugin's own chunks — slope overload, granular noise and bit-error streaks from one rule." />
+    <meta property="og:url" content="https://slope-demo.stoatworks-labs.com/" />
+    <meta property="og:image" content="https://stoatworks-labs.com/thumbs/slope.png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
+    <meta property="og:image:alt" content="Slope" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <main id="demo">
       <noscript>
+        <h1>Slope</h1>
+        <p>
+          An FFGL effect that runs every scan line of your clip through a
+          one-bit delta modulator, the CVSD codec of military and Bluetooth
+          voice: each sample sends one bit, saying above or below the decoder's
+          guess. Hard edges arrive as ramps smeared along the scan (slope
+          overload), flat areas get a fine two-sample dither (granular noise),
+          an adaptive step trades one for the other, and a flipped bit knocks
+          the rest of the line off as a streak that fades away on the leak.
+        </p>
         <p>
           This demo runs the plugin's shaders in your browser, so it needs
           JavaScript and WebGL2. The plugin itself, its source and its downloads
           are on
           <a href="https://github.com/stoatworks-labs/slope">its repository</a>.
         </p>
+        <ul>
+          <li><a href="https://stoatworks-labs.com/software/slope/">Project page and downloads</a></li>
+          <li><a href="https://stoatworks-labs.com/software/slope/guide/">User guide</a></li>
+          <li><a href="https://github.com/stoatworks-labs/slope">Source on GitHub</a></li>
+        </ul>
       </noscript>
     </main>
 
